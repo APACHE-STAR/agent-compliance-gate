@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-compliance-gate"
+version = "0.1.0"
+description = "A hard compliance gate for autonomous AI agents — drafting and sending are separate."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [{ name = "APACHE STAR LLC" }]
+keywords = ["ai", "agents", "compliance", "guardrails", "llm", "safety"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/APACHE-STAR/agent-compliance-gate"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/compliance_gate"]
