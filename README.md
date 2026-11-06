@@ -36,15 +36,13 @@ print(verdict.reasons)   # every reason from every stage, empty when approved
 # APPROVED never means "send" — it means "await human approval, then send".
 ```
 
-## Why this exists (a real incident)
+## Why this exists
 
-We ran an autonomous B2B outreach agent. One day it:
-- signed emails with **employees who don't exist**,
-- claimed **partnerships we never had**,
-- emailed recipients explicitly on a **do-not-contact list**.
-
-It did exactly what its prompt told it to. The lesson wasn't "tune the prompt" —
-it was: **no outward action without an independent gate.**
+An agent that drafts outbound messages will sooner or later draft something
+untrue: a signer who doesn't exist, a partnership you never had, a recipient
+who asked not to be contacted. A better prompt makes that rarer; it can't rule
+it out. Drafting is cheap and reversible; sending is not. So the check belongs
+between the two, in code, independent from the drafter.
 
 ## The pattern
 

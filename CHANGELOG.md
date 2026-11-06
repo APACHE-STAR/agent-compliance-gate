@@ -46,6 +46,12 @@ test in `tests/test_probes.py` that failed against 0.1.0.
 - Name matching ignores case and titles: `"Jane Doe"` matches
   `"Jane Doe (Founder)"`.
 
+### Docs
+
+- README matches the code: "Who sets what", a "Limits" section, and the
+  quickstart sample is executed by a test. The motivation section is now a
+  neutral description of the pattern.
+
 ### CI
 
 - `actions/setup-python` v5 to v7 (supersedes Dependabot PR #5).
