@@ -76,7 +76,7 @@ The drafter is the thing you don't trust, so it must not grade itself.
 
 | Field | Set by | If missing |
 |---|---|---|
-| `body`, `claims`, `signature_names` | drafter | `body` is scanned anyway |
+| `body`, `claims`, `signature_names` | drafter | `body` is scanned anyway; an empty `body` is REJECTED |
 | `sender`, `recipient_org` | your pipeline | REJECTED |
 | `offers_preapproved`, `has_legal_footer`, `subject_truthful` | your pipeline, after its own check (a lookup, a template, a person) | `None` = unknown = REJECTED |
 | `Policy` | your source of truth (DB, CRM, legal) | empty `real_people`, `verified_claims`, `known_partners`, `allowed_sender_domains` reject whatever they would have to vouch for; empty `do_not_contact` and `forbidden_patterns` block nothing |
@@ -119,8 +119,15 @@ are a floor, not a proof of honesty.
   caught, and a cue sentence passes as soon as it names one known partner,
   even if it also names an unknown one.
 - **Signatures are found only under a sign-off line** (`Best,`, `Regards,`,
-  `Thanks,`, `--`, ...) and only if the next line looks like a name of up to
-  five words. Declare signers in `signature_names` too.
+  `Thanks!`, `--`, ...). The line after a bare sign-off counts as a signer
+  unless it reads like prose (common words like "you" or "the", more than
+  eight words, ending in `.`/`?`/`!`). A name on the sign-off line itself
+  ("Cheers, Jane") must be capitalized. Company and team signatures are
+  signers too, so list the ones you use in `real_people`. Declare signers in
+  `signature_names` as well.
+- **Only a sentence that IS a verified claim is exempt** from the partnership
+  check. A verified claim embedded in a longer sentence is checked like any
+  other text (fail-closed).
 - **Word lists miss paraphrases and flag harmless uses** ("prevent spills").
   That's why the LLM reviewer layer and a human approval step exist.
 - **`do_not_contact` matches substrings of `recipient_org`.** It does not see

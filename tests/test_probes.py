@@ -104,6 +104,7 @@ def test_probe5_unconfirmed_flags_reject():
         recipient_org="An Independent Studio",
         signature_names=["Jane Doe (Founder)"],
         claims=["We make performance apparel."],
+        body="We make performance apparel.",
     )
     v = _rejected(d)
     assert len(v.reasons) == 3
