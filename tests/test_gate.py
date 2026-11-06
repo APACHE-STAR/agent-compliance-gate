@@ -12,7 +12,10 @@ POLICY = Policy(
 
 def _clean(**kw):
     base = dict(sender="partners@yourbrand.com", recipient_org="An Independent Studio",
-                signature_names=["Jane Doe (Founder)"], claims=["We make performance apparel."])
+                signature_names=["Jane Doe (Founder)"], claims=["We make performance apparel."],
+                body="We make performance apparel and would value a conversation.",
+                # caller-side checks, confirmed by the pipeline (not the drafter)
+                offers_preapproved=True, has_legal_footer=True, subject_truthful=True)
     base.update(kw)
     return Draft(**base)
 
